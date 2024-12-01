@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Game.css"; // Import the CSS file for styling
-import bgImage from './bg.png'; // Background image
-import birdImage from './Bird.png';
-import pipeTopImage from './PipeU.png'; // Upper pipe image
-import pipeBottomImage from './PipeD.png'; // Bottom pipe image
-import gameOverIcon from './gameOverIcon.png'; // Game over icon
-import replayButton from './restartIcon.png'; // Replay button icon
-import leaderboardButton from './leaderboardIcon.png'; // Leaderboard button icon
+import "../Game.css"; // Import the CSS file for styling
+import bgImage from "./bg.png"; // Background image
+import birdImage from "./Bird.png";
+import pipeTopImage from "./PipeU.png"; // Upper pipe image
+import pipeBottomImage from "./PipeD.png"; // Bottom pipe image
+import gameOverIcon from "./gameOverIcon.png"; // Game over icon
+import replayButton from "./restartIcon.png"; // Replay button icon
+import leaderboardButton from "./leaderboardIcon.png"; // Leaderboard button icon
+import cadburyLogo from "./cadbury-logo.png"; // Cadbury logo
 
 interface Pipe {
   x: number;
@@ -22,6 +23,7 @@ const Game: React.FC = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [bgPosition, setBgPosition] = useState(0);
+  const [showSplash, setShowSplash] = useState(true); // Splash screen state
 
   const gravity = 5;
   const baseJumpHeight = 60;
@@ -31,6 +33,14 @@ const Game: React.FC = () => {
   const pipesRef = useRef(pipes);
   const jumpRef = useRef(false);
   const lastClickTimeRef = useRef<number>(Date.now());
+
+  // Splash screen logic
+  useEffect(() => {
+    const splashTimer = setTimeout(() => {
+      setShowSplash(false);
+    }, 3000); // 3 seconds for the splash screen
+    return () => clearTimeout(splashTimer);
+  }, []);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -66,7 +76,7 @@ const Game: React.FC = () => {
       }, 30);
     }
     return () => clearInterval(timer);
-  }, [gameStarted, gameOver]);
+  }, [gameStarted, gameOver, birdPosition]);
 
   useEffect(() => {
     const birdRect = { top: birdPosition, bottom: birdPosition + 60, left: 20, right: 20 + 60 };
@@ -138,6 +148,63 @@ const Game: React.FC = () => {
       }
     });
   }, [pipes]);
+
+  if (showSplash) {
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          backgroundColor: "#330072",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "white",
+          fontSize: "1.5rem",
+        }}
+      >
+        <img
+          src={cadburyLogo}
+          alt="Cadbury Logo"
+          style={{
+            width: "200px",
+            marginBottom: "20px",
+          }}
+        />
+        <div
+          style={{
+            width: "80%",
+            height: "10px",
+            backgroundColor: "white",
+            borderRadius: "5px",
+            overflow: "hidden",
+            marginTop: "20px",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              backgroundColor: "#FFD700",
+              animation: "loader-animation 3s linear",
+            }}
+          ></div>
+        </div>
+        <style>{`
+          @keyframes loader-animation {
+            from {
+              width: 0%;
+            }
+            to {
+              width: 100%;
+            }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
 
   return (
     <div
@@ -224,13 +291,15 @@ const Game: React.FC = () => {
             alignItems: 'center',
           }}
         >
-          <img src={gameOverIcon} alt="Game Over"/>
+          <img src={gameOverIcon} alt="Game Over" style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%, -50%)'}}/>
+          <h2 style={{ color: '#ffc862', marginBottom: '50px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Score: {score}</h2>
           <div>
             <button
               className="replay-button"
               onClick={handleRestart}
               style={{
-                backgroundImage: `url(${replayButton})`,
+                position: 'relative',
+                              backgroundImage: `url(${replayButton})`,
                 backgroundSize: 'cover',
                 border: 'none',
                 // width: '120px',
@@ -242,6 +311,7 @@ const Game: React.FC = () => {
               className="leaderboard-button"
               onClick={() => alert('Leaderboard feature coming soon!')}
               style={{
+                position: 'relative',
                 backgroundImage: `url(${leaderboardButton})`,
                 backgroundSize: 'cover',
                 border: 'none',
