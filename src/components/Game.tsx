@@ -292,7 +292,7 @@ const Game: React.FC = () => {
           }}
         >
           <img src={gameOverIcon} alt="Game Over" style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%, -50%)'}}/>
-          <h2 style={{ color: '#ffc862', marginBottom: '50px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Score: {score}</h2>
+          <h2 style={{ color: '#e7b250', marginBottom: '50px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Score: {score}</h2>
           <div>
             <button
               className="replay-button"
