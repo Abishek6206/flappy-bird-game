@@ -48,3 +48,11 @@
   }
 
 }
+
+"homepage": "https://danielNeX16.github.io/flappy-bird-game",
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
+}
