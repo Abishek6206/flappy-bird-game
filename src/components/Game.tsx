@@ -275,54 +275,87 @@ const Game: React.FC = () => {
         </div>
       ))}
 
-      {gameOver && (
-        <div
-          className="game-over-screen"
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: '#330072',
-            padding: '20px',
-            borderRadius: '10px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <img src={gameOverIcon} alt="Game Over" style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%, -50%)'}}/>
-          <h2 style={{ color: '#f5c263', marginBottom: '50px', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Score: {score}</h2>
-          <div>
-            <button
-              className="replay-button"
-              onClick={handleRestart}
-              style={{
-                position: 'relative',
-                              backgroundImage: `url(${replayButton})`,
-                backgroundSize: 'cover',
-                border: 'none',
-                // width: '120px',
-                // height: '40px',
-                margin: '10px',
-              }}
-            />
-            <button
-              className="leaderboard-button"
-              onClick={() => alert('Leaderboard feature coming soon!')}
-              style={{
-                position: 'relative',
-                backgroundImage: `url(${leaderboardButton})`,
-                backgroundSize: 'cover',
-                border: 'none',
-                // width: '120px',
-                // height: '40px',
-                margin: '10px',
-              }}
-            />
-          </div>
-        </div>
-      )}
+{gameOver && (
+  <div
+    className="game-over-screen"
+    style={{
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: '#330072',
+      padding: '30px',
+      borderRadius: '15px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+      maxWidth: '98%',
+      textAlign: 'center',
+    }}
+  >
+    {/* Game Over Icon */}
+    <img
+      src={gameOverIcon}
+      alt="Game Over"
+      style={{
+        maxWidth: '500px',
+        marginBottom: '50px',
+      }}
+    />
+
+    {/* Score */}
+    <h2
+      style={{
+        color: '#f5c263',
+        fontSize: '2rem',
+        marginBottom: '50px',
+        textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+      }}
+    >
+      Score: {score}
+    </h2>
+
+    {/* Buttons */}
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '20px',
+        flexWrap: 'wrap',
+      }}
+    >
+      {/* Replay Button */}
+      <button
+        className="replay-button"
+        onClick={handleRestart}
+        style={{
+          backgroundImage: `url(${replayButton})`,
+          backgroundSize: 'cover',
+          border: 'none',
+          // width: '120px',
+          // height: '50px',
+          cursor: 'pointer',
+        }}
+      />
+
+      {/* Leaderboard Button */}
+      <button
+        className="leaderboard-button"
+        onClick={() => alert('Leaderboard feature coming soon!')}
+        style={{
+          backgroundImage: `url(${leaderboardButton})`,
+          backgroundSize: 'cover',
+          border: 'none',
+          // width: '120px',
+          // height: '50px',
+          cursor: 'pointer',
+        }}
+      />
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
