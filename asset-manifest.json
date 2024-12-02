@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/flappy-bird-game/static/css/main.5e0e06f3.css",
+    "main.js": "/flappy-bird-game/static/js/main.ea763aca.js",
+    "static/media/Bird.png": "/flappy-bird-game/static/media/Bird.64647933e95746c4b06e.png",
+    "static/media/bg.png": "/flappy-bird-game/static/media/bg.9f77d57c11f567e58169.png",
+    "static/media/cadbury-logo.png": "/flappy-bird-game/static/media/cadbury-logo.bdeb7d01f2a7611c36e0.png",
+    "index.html": "/flappy-bird-game/index.html",
+    "main.5e0e06f3.css.map": "/flappy-bird-game/static/css/main.5e0e06f3.css.map",
+    "main.ea763aca.js.map": "/flappy-bird-game/static/js/main.ea763aca.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5e0e06f3.css",
+    "static/js/main.ea763aca.js"
+  ]
+}
